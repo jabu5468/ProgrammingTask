@@ -2,6 +2,7 @@
 using ProgrammingTask.Repository;
 using ProgrammingTask.Service;
 using System;
+using System.Linq;
 using System.Text;
 
 namespace ProgrammingTask
@@ -39,7 +40,7 @@ namespace ProgrammingTask
         //For simplicity, assume input and output locations are the same
         private static void ProcessTopScoringPeople(ITextFileParser textFileParser, IPeopleScoresProcessor peopleScoresProcessor, string scores, string outputFile)
         {
-            var personScoreModels = textFileParser.GetScoresFromFile(scores);
+            var personScoreModels = textFileParser.GetScoresFromFile(scores).ToList();
             var results = peopleScoresProcessor.GetTopScoringPeople(personScoreModels);
 
             textFileParser.CreateTextFile(results, outputFile);
