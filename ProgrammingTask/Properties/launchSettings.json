@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ProgrammingTask": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\\\temp\\scores.txt\" \"C:\\\\temp\\topscores.txt\""
+    }
+  }
+}
