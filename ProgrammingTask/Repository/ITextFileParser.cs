@@ -8,6 +8,6 @@ namespace ProgrammingTask.Repository
     public interface ITextFileParser
     {
         void CreateTextFile(string text, string name);
-        List<PersonScoreEntity> GetScoresFromFile(string name);
+        IEnumerable<PersonScoreEntity> GetScoresFromFile(string name);
     }
 }
