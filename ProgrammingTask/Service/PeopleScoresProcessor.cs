@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 using ProgrammingTask.Models;
 
@@ -10,19 +8,31 @@ namespace ProgrammingTask.Service
     {
         public string GetTopScoringPeople(List<PersonScoreEntity> peopleScores)
         {
-            var orderedPeopleScores = peopleScores.OrderByDescending(x => x.Score);
-            var highestScoringPerson = orderedPeopleScores.FirstOrDefault();
-            if(highestScoringPerson != null)
+            decimal highestMark = 0;
+            var highestScorers = new List<PersonScoreEntity>();
+
+            foreach(var personScore in peopleScores)
             {
-                var builder = new StringBuilder();
-                var highestScoringPeople = peopleScores.Where(x => x.Score == highestScoringPerson.Score).ToList();
-                foreach(var highScorer in highestScoringPeople)
-                {
-                    builder.AppendLine($"{highScorer.FirstName} {highScorer.LastName}");
+                if (personScore.Score > highestMark) {
+                    highestMark = personScore.Score;
+                    highestScorers = new List<PersonScoreEntity>
+                    {
+                        personScore
+                    };
                 }
-                return builder.ToString();
+                else if (personScore.Score == highestMark)
+                {
+                    highestScorers.Add(personScore);
+                }
+
             }
-            return string.Empty;
+
+            var builder = new StringBuilder();
+            foreach (var highScorer in highestScorers)
+            {
+                builder.AppendLine($"{highScorer.FirstName} {highScorer.LastName}");
+            }
+            return builder.ToString();
         }
     }
 }
